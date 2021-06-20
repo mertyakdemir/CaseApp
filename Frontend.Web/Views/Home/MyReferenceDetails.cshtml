@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "MyReferenceDetails";
+    List<string> firstList = new List<string>(Model.FirstName);
+    List<string> lastList = new List<string>(Model.LastName);
+    string refstr = Model.RefUri;
+    refstr = refstr.Replace("25244", "17020").Replace("User", "Home").Replace("SignUp", "Register");
+}
+
+@model GetByIdUserQueryResponse
+
+<h1>My Reference Code</h1>
+
+<h3 style="color:darkgreen">@Model.RefCode</h3>
+
+<br />
+<hr />
+
+<h1>My reference code with the link</h1>
+
+<a href="@refstr"><h3>@refstr</h3></a>
+
+<br />
+<hr />
+
+<h1>Users who registered with my reference code</h1>
+
+@foreach (var item in firstList.Zip(lastList, (firstname, lastname) => new { FirstName = firstname, LastName = lastname }))
+{
+    <p>First Name: <b>@item.FirstName</b> - Last Name: <b>@item.LastName</b></p>
+}
